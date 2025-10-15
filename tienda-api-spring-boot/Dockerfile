@@ -1,5 +1,5 @@
 # Etapa de compilación, un docker especifico, que se etiqueta como build
-FROM gradle:jdk17-alpine AS build
+FROM gradle:jdk25-alpine AS build
 
 # Directorio de trabajo
 WORKDIR /app
@@ -18,7 +18,7 @@ RUN ./gradlew build
 # Etapa de ejecución, un docker especifico, que se etiqueta como run
 # Con una imagen de java, solo neceistamos el jre
 # FROM openjdk:17-jdk AS run
-FROM eclipse-temurin:17-jre-alpine AS run
+FROM eclipse-temurin:25-jre-alpine AS run
 
 # Directorio de trabajo
 WORKDIR /app
