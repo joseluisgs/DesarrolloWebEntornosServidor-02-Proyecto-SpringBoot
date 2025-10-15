@@ -69,6 +69,8 @@ public class SecurityConfig {
                         .requestMatchers("/storage/**").permitAll()
                         // Otras rutas de la API podemos permitiras o no....
                         .requestMatchers("/" + apiVersion + "/**").permitAll()
+                        // graphql
+                        .requestMatchers("/graphql", "/graphiql", "/graphiql/**").permitAll()
                         // Podríamos jugar con permismos por ejemplo para una ruta concreta
                         //.requestMatchers("/" + apiVersion + "/auth/me").hasRole("ADMIN")
                         // O con un acción HTTP, POST, PUT, DELETE, etc.

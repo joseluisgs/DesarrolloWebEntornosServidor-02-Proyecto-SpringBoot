@@ -1,0 +1,869 @@
+[2025-10-15 17:22:14] [main] [ERROR] o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1221)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at dev.joseluisgs.tiendaapispringboot.TiendaApiSpringBootApplication.main(TiendaApiSpringBootApplication.java:23)
+Caused by: java.lang.RuntimeException: Could not postProcess org.springframework.security.config.annotation.web.builders.WebSecurity@1db8ec3 of type class org.springframework.security.config.annotation.web.builders.WebSecurity
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:71)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.setFilterChainProxySecurityConfigurer(WebSecurityConfiguration.java:159)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:854)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospectorRequestTransformer': Cannot resolve reference to bean 'mvcHandlerMappingIntrospector' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:206)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1395)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1613)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1571)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.getIfUnique(DefaultListableBeanFactory.java:490)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.setApplicationContext(WebSecurity.java:433)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces(ApplicationContextAwareProcessor.java:110)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.postProcessBeforeInitialization(ApplicationContextAwareProcessor.java:85)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1818)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:419)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.initializeBeanIfNeeded(AutowireBeanFactoryObjectPostProcessor.java:98)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:67)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospector' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 48 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1426)
+	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:372)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.initHandlerMappings(HandlerMappingIntrospector.java:159)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.afterPropertiesSet(HandlerMappingIntrospector.java:146)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.orderedStream(DefaultListableBeanFactory.java:525)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.initRouterFunctions(RouterFunctionMapping.java:152)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.afterPropertiesSet(RouterFunctionMapping.java:130)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 68 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 82 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 96 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 109 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 123 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 136 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:190)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:698)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.initGraphQlSchema(DefaultSchemaResourceGraphQlSourceBuilder.java:140)
+	at org.springframework.graphql.execution.AbstractGraphQlSourceBuilder.build(AbstractGraphQlSourceBuilder.java:116)
+	at org.springframework.boot.autoconfigure.graphql.GraphQlAutoConfiguration.graphQlSource(GraphQlAutoConfiguration.java:120)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172)
+	... 139 common frames omitted
+Caused by: graphql.schema.idl.errors.SchemaProblem: errors=[InvalidSyntaxError{ message=Invalid syntax with ANTLR error 'token recognition error at: '`'' at line 31 column 68 ,offendingToken=null ,locations=[SourceLocation{line=31, column=68}] ,sourcePreview=- Las listas se denotan con corchetes `[]`.
+- Los objetos se definen con la palabra clave `type` y el nombre del tipo seguido de llaves `{}` con
+  los campos y tipos de datos.
+- Los comentarios se indican con `#` para una sola línea o con `"""` para bloques de texto.
+- Las consultas y mutaciones se definen dentro de los tipos `Query` y `Mutation` respectivamente.
+- Por ejemplo un productos: [Producto!]! significa que el campo `productos` es una lista
+  que contiene elementos del tipo `Producto`, donde cada elemento es obligatorio (no puede ser nulo),
+}]
+	at graphql.schema.idl.SchemaParser.handleParseException(SchemaParser.java:131)
+	at graphql.schema.idl.SchemaParser.parseImpl(SchemaParser.java:126)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:92)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:77)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:64)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:183)
+	... 153 common frames omitted
+[2025-10-15 17:25:02] [main] [ERROR] o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1221)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at dev.joseluisgs.tiendaapispringboot.TiendaApiSpringBootApplication.main(TiendaApiSpringBootApplication.java:23)
+Caused by: java.lang.RuntimeException: Could not postProcess org.springframework.security.config.annotation.web.builders.WebSecurity@3e2d5b6 of type class org.springframework.security.config.annotation.web.builders.WebSecurity
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:71)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.setFilterChainProxySecurityConfigurer(WebSecurityConfiguration.java:159)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:854)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospectorRequestTransformer': Cannot resolve reference to bean 'mvcHandlerMappingIntrospector' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:206)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1395)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1613)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1571)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.getIfUnique(DefaultListableBeanFactory.java:490)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.setApplicationContext(WebSecurity.java:433)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces(ApplicationContextAwareProcessor.java:110)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.postProcessBeforeInitialization(ApplicationContextAwareProcessor.java:85)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1818)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:419)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.initializeBeanIfNeeded(AutowireBeanFactoryObjectPostProcessor.java:98)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:67)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospector' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 48 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1426)
+	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:372)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.initHandlerMappings(HandlerMappingIntrospector.java:159)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.afterPropertiesSet(HandlerMappingIntrospector.java:146)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.orderedStream(DefaultListableBeanFactory.java:525)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.initRouterFunctions(RouterFunctionMapping.java:152)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.afterPropertiesSet(RouterFunctionMapping.java:130)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 68 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 82 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 96 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 109 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 123 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 136 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:190)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:698)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.initGraphQlSchema(DefaultSchemaResourceGraphQlSourceBuilder.java:140)
+	at org.springframework.graphql.execution.AbstractGraphQlSourceBuilder.build(AbstractGraphQlSourceBuilder.java:116)
+	at org.springframework.boot.autoconfigure.graphql.GraphQlAutoConfiguration.graphQlSource(GraphQlAutoConfiguration.java:120)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172)
+	... 139 common frames omitted
+Caused by: graphql.schema.idl.errors.SchemaProblem: errors=[InvalidSyntaxError{ message=Invalid syntax with ANTLR error 'token recognition error at: '`'' at line 31 column 68 ,offendingToken=null ,locations=[SourceLocation{line=31, column=68}] ,sourcePreview=- Las listas se denotan con corchetes `[]`.
+- Los objetos se definen con la palabra clave `type` y el nombre del tipo seguido de llaves `{}` con
+  los campos y tipos de datos.
+- Los comentarios se indican con `#` para una sola línea o con `"""` para bloques de texto.
+- Las consultas y mutaciones se definen dentro de los tipos `Query` y `Mutation` respectivamente.
+- Por ejemplo un productos: [Producto!]! significa que el campo `productos` es una lista
+  que contiene elementos del tipo `Producto`, donde cada elemento es obligatorio (no puede ser nulo),
+}]
+	at graphql.schema.idl.SchemaParser.handleParseException(SchemaParser.java:131)
+	at graphql.schema.idl.SchemaParser.parseImpl(SchemaParser.java:126)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:92)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:77)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:64)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:183)
+	... 153 common frames omitted
+[2025-10-15 17:25:29] [main] [ERROR] o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1221)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at dev.joseluisgs.tiendaapispringboot.TiendaApiSpringBootApplication.main(TiendaApiSpringBootApplication.java:23)
+Caused by: java.lang.RuntimeException: Could not postProcess org.springframework.security.config.annotation.web.builders.WebSecurity@171f9f2c of type class org.springframework.security.config.annotation.web.builders.WebSecurity
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:71)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.setFilterChainProxySecurityConfigurer(WebSecurityConfiguration.java:159)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:854)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospectorRequestTransformer': Cannot resolve reference to bean 'mvcHandlerMappingIntrospector' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:206)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1395)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1613)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1571)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.getIfUnique(DefaultListableBeanFactory.java:490)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.setApplicationContext(WebSecurity.java:433)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces(ApplicationContextAwareProcessor.java:110)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.postProcessBeforeInitialization(ApplicationContextAwareProcessor.java:85)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1818)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:419)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.initializeBeanIfNeeded(AutowireBeanFactoryObjectPostProcessor.java:98)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:67)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospector' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 48 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1426)
+	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:372)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.initHandlerMappings(HandlerMappingIntrospector.java:159)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.afterPropertiesSet(HandlerMappingIntrospector.java:146)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.orderedStream(DefaultListableBeanFactory.java:525)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.initRouterFunctions(RouterFunctionMapping.java:152)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.afterPropertiesSet(RouterFunctionMapping.java:130)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 68 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 82 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 96 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 109 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 123 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 136 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:190)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:698)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.initGraphQlSchema(DefaultSchemaResourceGraphQlSourceBuilder.java:140)
+	at org.springframework.graphql.execution.AbstractGraphQlSourceBuilder.build(AbstractGraphQlSourceBuilder.java:116)
+	at org.springframework.boot.autoconfigure.graphql.GraphQlAutoConfiguration.graphQlSource(GraphQlAutoConfiguration.java:120)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172)
+	... 139 common frames omitted
+Caused by: graphql.schema.idl.errors.SchemaProblem: errors=[InvalidSyntaxError{ message=Invalid syntax with ANTLR error 'token recognition error at: '`'' at line 31 column 68 ,offendingToken=null ,locations=[SourceLocation{line=31, column=68}] ,sourcePreview=- Las listas se denotan con corchetes `[]`.
+- Los objetos se definen con la palabra clave `type` y el nombre del tipo seguido de llaves `{}` con
+  los campos y tipos de datos.
+- Los comentarios se indican con `#` para una sola línea o con `"""` para bloques de texto.
+- Las consultas y mutaciones se definen dentro de los tipos `Query` y `Mutation` respectivamente.
+- Por ejemplo un productos: [Producto!]! significa que el campo `productos` es una lista
+  que contiene elementos del tipo `Producto`, donde cada elemento es obligatorio (no puede ser nulo),
+}]
+	at graphql.schema.idl.SchemaParser.handleParseException(SchemaParser.java:131)
+	at graphql.schema.idl.SchemaParser.parseImpl(SchemaParser.java:126)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:92)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:77)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:64)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:183)
+	... 153 common frames omitted
+[2025-10-15 17:28:01] [main] [ERROR] o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1221)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at dev.joseluisgs.tiendaapispringboot.TiendaApiSpringBootApplication.main(TiendaApiSpringBootApplication.java:23)
+Caused by: java.lang.RuntimeException: Could not postProcess org.springframework.security.config.annotation.web.builders.WebSecurity@2a59034e of type class org.springframework.security.config.annotation.web.builders.WebSecurity
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:71)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.setFilterChainProxySecurityConfigurer(WebSecurityConfiguration.java:159)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:854)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	... 19 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospectorRequestTransformer': Cannot resolve reference to bean 'mvcHandlerMappingIntrospector' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:206)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1395)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1613)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1571)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.getIfUnique(DefaultListableBeanFactory.java:490)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.setApplicationContext(WebSecurity.java:433)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces(ApplicationContextAwareProcessor.java:110)
+	at org.springframework.context.support.ApplicationContextAwareProcessor.postProcessBeforeInitialization(ApplicationContextAwareProcessor.java:85)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1818)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:419)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.initializeBeanIfNeeded(AutowireBeanFactoryObjectPostProcessor.java:98)
+	at org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor.postProcess(AutowireBeanFactoryObjectPostProcessor.java:67)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mvcHandlerMappingIntrospector' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 48 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'routerFunctionMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1426)
+	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:372)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.initHandlerMappings(HandlerMappingIntrospector.java:159)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.afterPropertiesSet(HandlerMappingIntrospector.java:146)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlRouterFunction' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlRouterFunction' parameter 0: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$1.orderedStream(DefaultListableBeanFactory.java:525)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.initRouterFunctions(RouterFunctionMapping.java:152)
+	at org.springframework.web.servlet.function.support.RouterFunctionMapping.afterPropertiesSet(RouterFunctionMapping.java:130)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822)
+	... 68 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'graphQlHttpHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'graphQlHttpHandler' parameter 0: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 82 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webGraphQlHandler' defined in class path resource [org/springframework/boot/autoconfigure/graphql/servlet/GraphQlWebMvcAutoConfiguration.class]: Unsatisfied dependency expressed through method 'webGraphQlHandler' parameter 0: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 96 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'executionGraphQlService' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Unsatisfied dependency expressed through method 'executionGraphQlService' parameter 0: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1760)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 109 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'graphQlSource' defined in class path resource [org/springframework/boot/autoconfigure/graphql/GraphQlAutoConfiguration.class]: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1643)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 123 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.graphql.execution.GraphQlSource]: Factory method 'graphQlSource' threw exception with message: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 136 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to parse schema resource: file [C:\Users\joseluisgs\Projects\DesarrolloWebEntornosServidor-02-Proyecto-SpringBoot\tienda-api-spring-boot\build\resources\main\graphql\schema.graphqls]
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:190)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:698)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.initGraphQlSchema(DefaultSchemaResourceGraphQlSourceBuilder.java:140)
+	at org.springframework.graphql.execution.AbstractGraphQlSourceBuilder.build(AbstractGraphQlSourceBuilder.java:116)
+	at org.springframework.boot.autoconfigure.graphql.GraphQlAutoConfiguration.graphQlSource(GraphQlAutoConfiguration.java:120)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172)
+	... 139 common frames omitted
+Caused by: graphql.schema.idl.errors.SchemaProblem: errors=[InvalidSyntaxError{ message=Invalid syntax with offending token '"""
+Esquema inicial para Producto y Categoria en la tienda.
+
+Este esquema permite:
+- Consultar productos individuales y listados, con todos sus datos y la categoría asociada.
+- Consultar categorías individuales y listados, así como los productos de cada categoría.
+- Ampliar el esquema fácilmente para mutaciones (crear/actualizar/borrar) y suscripciones (tiempo real).
+
+--------------------------------------------------------------------------------
+¿QUÉ ES UN ESQUEMA GRAPHQL?
+--------------------------------------------------------------------------------
+Un esquema GraphQL es la definición formal de los tipos de datos, operaciones y relaciones
+que una API GraphQL puede manejar. Es el contrato entre el cliente y el servidor.
+Define:
+1. Tipos (Types): Objetos, listas, escalares (como String, Int, Float, Boolean, ID).
+2. Consultas (Queries): Operaciones de lectura (obtener datos).
+3. Mutaciones (Mutations): Operaciones de escritura (crear, actualizar, borrar datos).
+4. Suscripciones (Subscriptions): Recibir actualizaciones en tiempo real.
+5. Relaciones: Cómo se relacionan los tipos entre sí.
+
+--------------------------------------------------------------------------------
+NOTACIÓN BÁSICA DE GRAPHQL
+--------------------------------------------------------------------------------
+- Los tipos se definen con la palabra clave 'type'.
+- Los campos de un tipo se definen como 'nombre: Tipo'.
+- Tipos escalares comunes: String, Int, Float, Boolean, ID.
+- Un campo '!' es obligatorio (no puede ser nulo).
+- Las listas se indican con corchetes: [Tipo!]! (lista no nula de elementos no nulos).
+- Los comentarios de una línea se indican con #, los de varias líneas con triple comilla ("""' at line 1 column 1 ,offendingToken="""
+Esquema inicial para Producto y Categoria en la tienda.
+
+Este esquema permite:
+- Consultar productos individuales y listados, con todos sus datos y la categoría asociada.
+- Consultar categorías individuales y listados, así como los productos de cada categoría.
+- Ampliar el esquema fácilmente para mutaciones (crear/actualizar/borrar) y suscripciones (tiempo real).
+
+--------------------------------------------------------------------------------
+¿QUÉ ES UN ESQUEMA GRAPHQL?
+--------------------------------------------------------------------------------
+Un esquema GraphQL es la definición formal de los tipos de datos, operaciones y relaciones
+que una API GraphQL puede manejar. Es el contrato entre el cliente y el servidor.
+Define:
+1. Tipos (Types): Objetos, listas, escalares (como String, Int, Float, Boolean, ID).
+2. Consultas (Queries): Operaciones de lectura (obtener datos).
+3. Mutaciones (Mutations): Operaciones de escritura (crear, actualizar, borrar datos).
+4. Suscripciones (Subscriptions): Recibir actualizaciones en tiempo real.
+5. Relaciones: Cómo se relacionan los tipos entre sí.
+
+--------------------------------------------------------------------------------
+NOTACIÓN BÁSICA DE GRAPHQL
+--------------------------------------------------------------------------------
+- Los tipos se definen con la palabra clave 'type'.
+- Los campos de un tipo se definen como 'nombre: Tipo'.
+- Tipos escalares comunes: String, Int, Float, Boolean, ID.
+- Un campo '!' es obligatorio (no puede ser nulo).
+- Las listas se indican con corchetes: [Tipo!]! (lista no nula de elementos no nulos).
+- Los comentarios de una línea se indican con #, los de varias líneas con triple comilla (""" ,locations=[SourceLocation{line=1, column=1}] ,sourcePreview="""
+Esquema inicial para Producto y Categoria en la tienda.
+
+Este esquema permite:
+}]
+	at graphql.schema.idl.SchemaParser.handleParseException(SchemaParser.java:131)
+	at graphql.schema.idl.SchemaParser.parseImpl(SchemaParser.java:126)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:92)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:77)
+	at graphql.schema.idl.SchemaParser.parse(SchemaParser.java:64)
+	at org.springframework.graphql.execution.DefaultSchemaResourceGraphQlSourceBuilder.parse(DefaultSchemaResourceGraphQlSourceBuilder.java:183)
+	... 153 common frames omitted
