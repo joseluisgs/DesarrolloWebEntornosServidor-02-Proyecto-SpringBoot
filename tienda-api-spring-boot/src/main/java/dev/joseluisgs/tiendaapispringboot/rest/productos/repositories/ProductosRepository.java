@@ -1,5 +1,6 @@
 package dev.joseluisgs.tiendaapispringboot.rest.productos.repositories;
 
+import dev.joseluisgs.tiendaapispringboot.rest.categorias.models.Categoria;
 import dev.joseluisgs.tiendaapispringboot.rest.productos.models.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -33,4 +34,7 @@ public interface ProductosRepository extends JpaRepository<Producto, Long>, JpaS
 
     // Buscamos si existe una categoria con el mismo id
     boolean existsByCategoriaId(UUID id);
+
+    // Añade este método para buscar productos por categoría
+    List<Producto> findByCategoria(Categoria categoria);
 }

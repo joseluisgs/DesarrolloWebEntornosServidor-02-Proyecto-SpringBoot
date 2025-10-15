@@ -1,0 +1,147 @@
+# ==========================================================================
+# ESQUEMA GRAPHQL PARA TIENDA - PRODUCTO Y CATEGORIA
+# ==========================================================================
+# Este esquema permite consultar productos con su categoria y categorias
+# con sus productos. Es un ejemplo educativo de como estructurar GraphQL.
+#
+# QUE ES UN ESQUEMA GRAPHQL:
+# Un esquema GraphQL define formalmente los tipos de datos, consultas y
+# mutaciones que una API puede manejar. Es el contrato entre cliente y servidor.
+#
+# COMPONENTES CLAVE:
+# 1. Tipos (Types): Define objetos, listas, escalares (String, Int, Float, Boolean, ID)
+# 2. Consultas (Queries): Operaciones de lectura para obtener datos
+# 3. Mutaciones (Mutations): Operaciones de escritura para modificar datos
+# 4. Suscripciones (Subscriptions): Actualizaciones en tiempo real
+# 5. Relaciones: Como se conectan los diferentes tipos entre si
+#
+# NOTACION BASICA:
+# - Los tipos se definen con 'type NombreTipo { campos }'
+# - Los campos se definen como 'nombre: Tipo'
+# - Tipos escalares: String, Int, Float, Boolean, ID
+# - Campo obligatorio: 'nombre: String!' (no puede ser nulo)
+# - Campo opcional: 'nombre: String' (puede ser nulo)
+# - Lista: '[String!]!' = lista no nula de strings no nulos
+# - Lista opcional: '[String]' = lista que puede ser nula con elementos que pueden ser nulos
+# - Comentarios de linea: # (como este)
+# - Las queries van en el tipo 'Query', las mutations en 'Mutation'
+#
+# EJEMPLO DE NOTACION:
+# productos: [Producto!]! significa:
+# - El campo se llama 'productos'
+# - Es una lista (corchetes [])
+# - Contiene elementos del tipo 'Producto'
+# - Cada elemento es obligatorio (Producto!)
+# - La lista en si es obligatoria (!al final)
+# ==========================================================================
+
+# --- CONSULTAS DISPONIBLES ---
+# Aqui se definen todas las operaciones de lectura que pueden hacer los clientes
+type Query {
+    # Devuelve la lista completa de todos los productos disponibles
+    productos: [Producto!]!
+
+    # Busca y devuelve un producto especifico por su identificador unico
+    # Parametro: id (obligatorio) - El ID del producto a buscar
+    # Retorna: Producto o null si no existe
+    productoById(id: ID!): Producto
+
+    # Devuelve la lista completa de todas las categorias disponibles
+    categorias: [Categoria!]!
+
+    # Busca y devuelve una categoria especifica por su identificador unico (UUID)
+    # Parametro: id (obligatorio) - El UUID de la categoria a buscar
+    # Retorna: Categoria o null si no existe
+    categoriaById(id: ID!): Categoria
+}
+
+# --- TIPO PRODUCTO ---
+# Representa un producto en la tienda con todos sus atributos y relaciones
+type Producto {
+    id: ID!                     # Identificador unico numerico autoincremental (Long en Java)
+    marca: String!              # Marca comercial del producto (ej: "Nike", "Adidas")
+    modelo: String!             # Modelo especifico del producto (ej: "Air Max 90")
+    descripcion: String!        # Descripcion detallada del producto
+    precio: Float!              # Precio actual del producto en euros
+    imagen: String!             # URL completa de la imagen del producto
+    stock: Int!                 # Cantidad disponible en inventario
+    uuid: String!               # Identificador UUID unico del producto (para APIs externas)
+    createdAt: String!          # Fecha y hora de creacion (formato ISO 8601)
+    updatedAt: String!          # Fecha y hora de ultima modificacion (formato ISO 8601)
+    isDeleted: Boolean!         # Indica si el producto esta marcado como eliminado (borrado logico)
+    categoria: Categoria!       # Categoria a la que pertenece este producto (relacion ManyToOne)
+}
+
+# --- TIPO CATEGORIA ---
+# Representa una categoria de productos con sus atributos y productos asociados
+type Categoria {
+    id: ID!                     # Identificador unico UUID de la categoria
+    nombre: String!             # Nombre descriptivo de la categoria (ej: "Deportes", "Electronica")
+    createdAt: String!          # Fecha y hora de creacion (formato ISO 8601)
+    updatedAt: String!          # Fecha y hora de ultima modificacion (formato ISO 8601)
+    isDeleted: Boolean!         # Indica si la categoria esta marcada como eliminada (borrado logico)
+    productos: [Producto!]!     # Lista de todos los productos de esta categoria (relacion OneToMany)
+}
+
+# ==========================================================================
+# EJEMPLOS DE CONSULTAS PARA EL ALUMNADO:
+# ==========================================================================
+#
+# 1. OBTENER TODOS LOS PRODUCTOS CON SU CATEGORIA:
+# query {
+#   productos {
+#     id
+#     marca
+#     modelo
+#     precio
+#     categoria {
+#       id
+#       nombre
+#     }
+#   }
+# }
+#
+# 2. OBTENER UN PRODUCTO ESPECIFICO POR ID:
+# query {
+#   productoById(id: "1") {
+#     marca
+#     modelo
+#     precio
+#     stock
+#     categoria {
+#       nombre
+#     }
+#   }
+# }
+#
+# 3. OBTENER UNA CATEGORIA CON TODOS SUS PRODUCTOS:
+# query {
+#   categoriaById(id: "uuid-de-la-categoria") {
+#     nombre
+#     productos {
+#       id
+#       marca
+#       modelo
+#       precio
+#     }
+#   }
+# }
+#
+# 4. OBTENER SOLO NOMBRES DE PRODUCTOS Y CATEGORIAS:
+# query {
+#   productos {
+#     marca
+#     modelo
+#     categoria {
+#       nombre
+#     }
+#   }
+# }
+#
+# NOTAS IMPORTANTES:
+# - En GraphQL solo obtienes los campos que pides explicitamente
+# - Puedes anidar relaciones (producto -> categoria -> productos -> categoria...)
+# - El servidor valida automaticamente que las queries cumplan el esquema
+# - Puedes ampliar con Mutations para crear/actualizar/borrar datos
+# - Puedes añadir paginacion, filtros y ordenacion a las listas
+# ==========================================================================
