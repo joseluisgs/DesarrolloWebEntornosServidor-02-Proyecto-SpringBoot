@@ -55,6 +55,9 @@ dependencies {
     // Spring Security
     implementation("org.springframework.boot:spring-boot-starter-security")
     
+    // GraphQL con Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-graphql")
+    
     // Lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
