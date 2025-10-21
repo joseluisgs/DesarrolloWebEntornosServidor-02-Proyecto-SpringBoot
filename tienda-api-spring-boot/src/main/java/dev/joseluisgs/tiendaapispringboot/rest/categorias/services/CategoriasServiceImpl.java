@@ -100,7 +100,6 @@ public class CategoriasServiceImpl implements CategoriasService {
     public void deleteById(UUID id) {
         log.info("Borrando categoría por id: " + id);
         Categoria categoria = categoriasRepository.findById(id).orElseThrow(() -> new CategoriaNotFound(id));
-        //categoriasRepository.deleteById(id);
         // O lo marcamos como borrado, para evitar problemas de cascada, no podemos borrar categorías con productos!!!
         // La otra forma es que comprobaramos si hay productos para borrarlos antes
         // categoriasRepository.updateIsDeletedToTrueById(id);
