@@ -58,6 +58,9 @@ dependencies {
     // GraphQL con Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-graphql")
     
+    // Cache con redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    
     // Lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
