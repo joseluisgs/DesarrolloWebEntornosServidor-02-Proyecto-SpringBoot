@@ -328,7 +328,10 @@ public class ProductosServiceImpl implements ProductosService {
                     log.error("Error al enviar el mensaje a través del servicio WebSocket", e);
                 }
             });
+            senderThread.setName("WebsocketProducto-" + data.getId());
+            senderThread.setDaemon(true); // Para que no impida que la aplicación se cierre
             senderThread.start();
+            log.info("Hilo de websocket iniciado: {}", data.getId());
         } catch (JsonProcessingException e) {
             log.error("Error al convertir la notificación a JSON", e);
         }

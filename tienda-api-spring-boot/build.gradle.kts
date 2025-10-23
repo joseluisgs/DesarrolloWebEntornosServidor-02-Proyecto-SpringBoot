@@ -61,6 +61,9 @@ dependencies {
     // Cache con redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     
+    // Mail sender
+    implementation("org.springframework.boot:spring-boot-starter-mail")
+    
     // Lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")

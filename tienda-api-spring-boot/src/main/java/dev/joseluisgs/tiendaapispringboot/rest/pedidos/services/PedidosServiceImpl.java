@@ -1,5 +1,6 @@
 package dev.joseluisgs.tiendaapispringboot.rest.pedidos.services;
 
+import dev.joseluisgs.tiendaapispringboot.mail.service.PedidoEmailService;
 import dev.joseluisgs.tiendaapispringboot.rest.pedidos.exceptions.*;
 import dev.joseluisgs.tiendaapispringboot.rest.pedidos.models.LineaPedido;
 import dev.joseluisgs.tiendaapispringboot.rest.pedidos.models.Pedido;
@@ -7,6 +8,7 @@ import dev.joseluisgs.tiendaapispringboot.rest.pedidos.repositories.PedidosRepos
 import dev.joseluisgs.tiendaapispringboot.rest.productos.repositories.ProductosRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,10 +26,13 @@ import java.time.LocalDateTime;
 public class PedidosServiceImpl implements PedidosService {
     private final PedidosRepository pedidosRepository;
     private final ProductosRepository productosRepository;
+    private final PedidoEmailService pedidoEmailService;
 
-    public PedidosServiceImpl(PedidosRepository pedidosRepository, ProductosRepository productosRepository) {
+    @Autowired
+    public PedidosServiceImpl(PedidosRepository pedidosRepository, ProductosRepository productosRepository, PedidoEmailService pedidoEmailService) {
         this.pedidosRepository = pedidosRepository;
         this.productosRepository = productosRepository;
+        this.pedidoEmailService = pedidoEmailService;
     }
 
     @Override
@@ -70,7 +75,13 @@ public class PedidosServiceImpl implements PedidosService {
         // Guardamos el pedido en la base de datos
         // Si existe lo actualizamos, son cosas que veremos!!!
 
-        return pedidosRepository.save(pedidoToSave);
+        // Guardar pedido
+        var pedidoGuardado = pedidosRepository.save(pedidoToSave);
+
+        // 🚀 Enviar email en hilo separado
+        enviarEmailConfirmacionAsync(pedidoGuardado);
+
+        return pedidoGuardado;
     }
 
     Pedido reserveStockPedidos(Pedido pedido) {
@@ -188,5 +199,41 @@ public class PedidosServiceImpl implements PedidosService {
                 throw new ProductoBadPrice(lineaPedido.getIdProducto());
             }
         });
+    }
+
+    /**
+     * Método privado para enviar email de confirmación en un hilo separado
+     *
+     * @param pedido El pedido para el cual enviar la confirmación
+     */
+    private void enviarEmailConfirmacionAsync(Pedido pedido) {
+        Thread emailThread = new Thread(() -> {
+            try {
+                log.info("Iniciando envío de email en hilo separado para pedido: {}", pedido.get_id());
+
+                // Enviar el email
+                pedidoEmailService.enviarConfirmacionPedidoHtml(pedido);
+
+                log.info("✅ Email de confirmación enviado correctamente para pedido: {}", pedido.get_id());
+
+            } catch (Exception e) {
+                log.warn("❌ Error enviando email de confirmación para pedido {}: {}",
+                        pedido.get_id(), e.getMessage());
+
+                // Aquí podrías añadir lógica adicional como:
+                // - Guardar el error en base de datos
+                // - Enviar notificación al equipo de soporte
+                // - Programar reintento
+            }
+        });
+
+        // Configurar el hilo
+        emailThread.setName("EmailSender-Pedido-" + pedido.get_id());
+        emailThread.setDaemon(true); // Para que no impida que la aplicación se cierre
+
+        // Iniciar el hilo (no bloqueante)
+        emailThread.start();
+
+        log.info("Hilo de email iniciado para pedido: {}", pedido.get_id());
     }
 }
