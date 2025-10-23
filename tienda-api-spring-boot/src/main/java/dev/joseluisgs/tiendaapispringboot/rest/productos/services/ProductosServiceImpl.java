@@ -115,13 +115,25 @@ public class ProductosServiceImpl implements ProductosService {
                 stockMin.map(s -> criteriaBuilder.lessThanOrEqualTo(root.get("stock"), s))
                         .orElseGet(() -> criteriaBuilder.isTrue(criteriaBuilder.literal(true)));
 
-        // Combinamos las especificaciones
+        /*// Combinamos las especificaciones
+        // Deprecado desde Spring Data JPA 3.5.0 el where
         Specification<Producto> criterio = Specification.where(specMarcaProducto)
                 .and(specCategoriaProducto)
                 .and(specIsDeleted)
                 .and(specModeloProducto)
                 .and(specPrecioMaxProducto)
-                .and(specStockMinProducto);
+                .and(specStockMinProducto);*/
+
+        // 🚀 NUEVA FORMA: Usar allOf() en lugar de where()
+        Specification<Producto> criterio = Specification.allOf(
+                specMarcaProducto,
+                specCategoriaProducto,
+                specIsDeleted,
+                specModeloProducto,
+                specPrecioMaxProducto,
+                specStockMinProducto
+        );
+
         return productosRepository.findAll(criterio, pageable).map(productosMapper::toProductResponse);
     }
 
@@ -328,7 +340,10 @@ public class ProductosServiceImpl implements ProductosService {
                     log.error("Error al enviar el mensaje a través del servicio WebSocket", e);
                 }
             });
+            senderThread.setName("WebsocketProducto-" + data.getId());
+            senderThread.setDaemon(true); // Para que no impida que la aplicación se cierre
             senderThread.start();
+            log.info("Hilo de websocket iniciado: {}", data.getId());
         } catch (JsonProcessingException e) {
             log.error("Error al convertir la notificación a JSON", e);
         }
