@@ -115,13 +115,25 @@ public class ProductosServiceImpl implements ProductosService {
                 stockMin.map(s -> criteriaBuilder.lessThanOrEqualTo(root.get("stock"), s))
                         .orElseGet(() -> criteriaBuilder.isTrue(criteriaBuilder.literal(true)));
 
-        // Combinamos las especificaciones
+        /*// Combinamos las especificaciones
+        // Deprecado desde Spring Data JPA 3.5.0 el where
         Specification<Producto> criterio = Specification.where(specMarcaProducto)
                 .and(specCategoriaProducto)
                 .and(specIsDeleted)
                 .and(specModeloProducto)
                 .and(specPrecioMaxProducto)
-                .and(specStockMinProducto);
+                .and(specStockMinProducto);*/
+
+        // 🚀 NUEVA FORMA: Usar allOf() en lugar de where()
+        Specification<Producto> criterio = Specification.allOf(
+                specMarcaProducto,
+                specCategoriaProducto,
+                specIsDeleted,
+                specModeloProducto,
+                specPrecioMaxProducto,
+                specStockMinProducto
+        );
+
         return productosRepository.findAll(criterio, pageable).map(productosMapper::toProductResponse);
     }
 
