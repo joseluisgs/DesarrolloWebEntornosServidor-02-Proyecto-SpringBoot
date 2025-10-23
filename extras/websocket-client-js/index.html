@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Hello Kitty WebSocket Client 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hello-kitty-pink: #FF69B4;
+            --hello-kitty-light-pink: #FFB6C1;
+            --hello-kitty-baby-pink: #FFC0CB;
+            --hello-kitty-white: #FFFFFF;
+            --hello-kitty-red: #FF1493;
+            --hello-kitty-yellow: #FFD700;
+            --hello-kitty-purple: #DA70D6;
+            --hello-kitty-blue: #87CEEB;
+            --hello-kitty-green: #98FB98;
+            --shadow-pink: rgba(255, 105, 180, 0.3);
+            --gradient-pink: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 50%, #FF1493 100%);
+            --gradient-soft: linear-gradient(135deg, #FFFFFF 0%, #FFB6C1 50%, #FFC0CB 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(45deg, #FFB6C1, #FFC0CB, #FFE4E1, #FFFFFF);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating hearts animation */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--hello-kitty-light-pink);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: var(--gradient-pink);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px var(--shadow-pink);
+            border: 3px solid var(--hello-kitty-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header::before {
+            content: '🎀';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 3em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .main-header::after {
+            content: '🎀';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 3em;
+            animation: bounce 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(10deg); }
+        }
+
+        .main-header h1 {
+            color: var(--hello-kitty-white);
+            font-size: 2.5em;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .kawaii-card {
+            background: var(--gradient-soft);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px var(--shadow-pink);
+            border: 3px solid var(--hello-kitty-pink);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .kawaii-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--shadow-pink);
+        }
+
+        .kawaii-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--hello-kitty-yellow);
+            border-radius: 50%;
+            border: 2px solid var(--hello-kitty-pink);
+        }
+
+        .kawaii-card::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--hello-kitty-yellow);
+            border-radius: 50%;
+            border: 2px solid var(--hello-kitty-pink);
+        }
+
+        .status {
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.1em;
+            border: 3px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateY(-50%);
+            animation: shimmer 2s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .connected {
+            background: linear-gradient(135deg, var(--hello-kitty-green), #90EE90);
+            color: #006400;
+            border-color: #006400;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .disconnected {
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            color: var(--hello-kitty-red);
+            border-color: var(--hello-kitty-red);
+        }
+
+        .connecting {
+            background: linear-gradient(135deg, var(--hello-kitty-yellow), #FFA500);
+            color: #FF4500;
+            border-color: #FF4500;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .debug-info {
+            background: linear-gradient(135deg, var(--hello-kitty-purple), #DDA0DD);
+            border: 3px solid #9370DB;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #4B0082;
+            position: relative;
+        }
+
+        .debug-info::before {
+            content: '🔍';
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            background: var(--hello-kitty-white);
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 1.2em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .url-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 20px;
+            border: 3px solid var(--hello-kitty-pink);
+            border-radius: 25px;
+            background: var(--hello-kitty-white);
+            font-size: 1em;
+            color: var(--hello-kitty-red);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(255, 105, 180, 0.2);
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: var(--hello-kitty-red);
+            background: #FFF5F8;
+            transform: scale(1.02);
+        }
+
+        .kawaii-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            min-width: 120px;
+        }
+
+        .kawaii-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .kawaii-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .kawaii-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .kawaii-button:active {
+            transform: translateY(0px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--hello-kitty-green), #90EE90);
+            color: #006400;
+            border: 3px solid #006400;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #FF69B4, var(--hello-kitty-red));
+            color: var(--hello-kitty-white);
+            border: 3px solid var(--hello-kitty-red);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--hello-kitty-yellow), #FFA500);
+            color: #FF4500;
+            border: 3px solid #FF4500;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--hello-kitty-purple), #DDA0DD);
+            color: var(--hello-kitty-white);
+            border: 3px solid #9370DB;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--hello-kitty-blue), #87CEEB);
+            color: #000080;
+            border: 3px solid #000080;
+        }
+
+        .kawaii-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .message-form {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            align-items: center;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 15px 25px;
+            border: 3px solid var(--hello-kitty-pink);
+            border-radius: 25px;
+            background: var(--hello-kitty-white);
+            font-size: 1.1em;
+            color: var(--hello-kitty-red);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(255, 105, 180, 0.2);
+        }
+
+        #messageInput:focus {
+            outline: none;
+            border-color: var(--hello-kitty-red);
+            background: #FFF5F8;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px var(--shadow-pink);
+        }
+
+        #messagesContainer {
+            border: 3px solid var(--hello-kitty-pink);
+            border-radius: 20px;
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--hello-kitty-white), #FFF8F8);
+            position: relative;
+        }
+
+        #messagesContainer::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #messagesContainer::-webkit-scrollbar-track {
+            background: var(--hello-kitty-light-pink);
+            border-radius: 10px;
+        }
+
+        #messagesContainer::-webkit-scrollbar-thumb {
+            background: var(--hello-kitty-pink);
+            border-radius: 10px;
+            border: 2px solid var(--hello-kitty-light-pink);
+        }
+
+        #messagesContainer::-webkit-scrollbar-thumb:hover {
+            background: var(--hello-kitty-red);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            animation: messageAppear 0.5s ease;
+            border: 2px solid;
+        }
+
+        @keyframes messageAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-sent {
+            background: linear-gradient(135deg, var(--hello-kitty-blue), #B0E0E6);
+            border-color: #4169E1;
+            color: #000080;
+            margin-left: 40px;
+        }
+
+        .message-sent::before {
+            content: '💌';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .message-received {
+            background: linear-gradient(135deg, var(--hello-kitty-green), #F0FFF0);
+            border-color: #32CD32;
+            color: #006400;
+            margin-right: 40px;
+        }
+
+        .message-received::before {
+            content: '💕';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .message-error {
+            background: linear-gradient(135deg, #FFB6C1, #FFA0B4);
+            border-color: var(--hello-kitty-red);
+            color: var(--hello-kitty-red);
+            animation: shake 0.5s ease;
+        }
+
+        .message-error::before {
+            content: '💔';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .message-info {
+            background: linear-gradient(135deg, var(--hello-kitty-yellow), #FFFACD);
+            border-color: #FFD700;
+            color: #B8860B;
+        }
+
+        .message-info::before {
+            content: '🌟';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+
+        .timestamp {
+            font-size: 0.85em;
+            opacity: 0.7;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .troubleshooting {
+            background: linear-gradient(135deg, #FFE4E1, #FFF0F5);
+            border: 3px solid var(--hello-kitty-pink);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .troubleshooting::before {
+            content: '🎀💭';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--hello-kitty-white);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 1.2em;
+        }
+
+        .troubleshooting h4 {
+            color: var(--hello-kitty-red);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .troubleshooting ul {
+            margin: 0;
+            padding-left: 25px;
+        }
+
+        .troubleshooting li {
+            margin: 8px 0;
+            color: #D8006B;
+            font-weight: 600;
+        }
+
+        .section-title {
+            color: var(--hello-kitty-red);
+            font-size: 1.4em;
+            font-weight: 800;
+            margin: 25px 0 15px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '✨';
+            position: absolute;
+            top: 0;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .section-title::before {
+            left: -30px;
+        }
+
+        .section-title::after {
+            right: -30px;
+            animation-delay: 1s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.7; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .url-input {
+                min-width: 100%;
+            }
+            
+            .message {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="hearts-bg" id="heartsBackground"></div>
+
+    <div class="container">
+        <div class="main-header">
+            <h1>🐱 Hello Kitty WebSocket Client 🐱</h1>
+        </div>
+        
+        <!-- Información de debug -->
+        <div class="kawaii-card">
+            <div class="debug-info">
+                <strong>🔍 Kawaii Debug Info:</strong><br>
+                Browser: <span id="browserInfo"></span><br>
+                Secure Context: <span id="secureContext"></span><br>
+                WebSocket Support: <span id="wsSupport"></span><br>
+                Current URL: <span id="currentUrl"></span>
+            </div>
+        </div>
+        
+        <!-- Troubleshooting -->
+        <div class="troubleshooting">
+            <h4>🛠️ Solución de problemas kawaii:</h4>
+            <ul>
+                <li><strong>Error 1006:</strong> El servidor está durmiendo como Hello Kitty 😴</li>
+                <li><strong>Mixed Content:</strong> Usa WSS si estás en HTTPS, nya~ 🌸</li>
+                <li><strong>CORS:</strong> El servidor necesita permitir amiguitos WebSocket 💕</li>
+                <li><strong>Puerto:</strong> ¿Está el servidor en la casa correcta? 🏠</li>
+            </ul>
+        </div>
+        
+        <!-- Estado de la conexión -->
+        <div id="connectionStatus" class="status disconnected">
+            😿 Desconectado - Hello Kitty está triste
+        </div>
+        
+        <!-- Controles de conexión -->
+        <div class="kawaii-card">
+            <div class="controls">
+                <input type="text" id="wsUrl" class="url-input" 
+                       value="ws://localhost:3080/ws/v1/productos" 
+                       placeholder="URL del WebSocket kawaii">
+                <button id="connectBtn" class="kawaii-button btn-success">🌸 Conectar</button>
+                <button id="disconnectBtn" class="kawaii-button btn-danger" disabled>💔 Desconectar</button>
+                <button id="testConnBtn" class="kawaii-button btn-warning">🧪 Test</button>
+                <button id="clearBtn" class="kawaii-button btn-secondary">🧹 Limpiar</button>
+            </div>
+        </div>
+        
+        <!-- URLs de prueba -->
+        <div class="kawaii-card">
+            <h3 class="section-title">🔗 URLs de prueba súper kawaii</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <button class="kawaii-button btn-secondary" onclick="setUrl('ws://localhost:3080/ws/v1/productos')">
+                    🏠 localhost:3080
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="setUrl('ws://127.0.0.1:3080/ws/v1/productos')">
+                    🏡 127.0.0.1:3080
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="setUrl('ws://localhost:8080/ws/v1/productos')">
+                    🏘️ localhost:8080
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="setUrl('wss://echo.websocket.org')">
+                    🌟 Test Echo Server
+                </button>
+            </div>
+        </div>
+        
+        <!-- Formulario para enviar mensajes -->
+        <div class="kawaii-card">
+            <h3 class="section-title">💌 Enviar mensaje kawaii</h3>
+            <div class="message-form">
+                <input type="text" id="messageInput" 
+                       placeholder="Escribe tu mensaje súper kawaii aquí... 🎀" 
+                       disabled>
+                <button id="sendBtn" class="kawaii-button btn-primary" disabled>📤 Enviar</button>
+            </div>
+        </div>
+        
+        <!-- Mensajes predefinidos -->
+        <div class="kawaii-card">
+            <h3 class="section-title">📋 Mensajes predefinidos kawaii</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <button class="kawaii-button btn-secondary" onclick="sendPredefinedMessage('{"action": "getAllProducts"}')">
+                    🛍️ Get All Products
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="sendPredefinedMessage('{"action": "getProduct", "id": 1}')">
+                    🎁 Get Product 1
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="sendPredefinedMessage('ping')">
+                    🏓 Ping Kawaii
+                </button>
+                <button class="kawaii-button btn-secondary" onclick="sendPredefinedMessage('hello world')">
+                    🌍 Hello World
+                </button>
+            </div>
+        </div>
+        
+        <!-- Contenedor de mensajes -->
+        <div class="kawaii-card">
+            <h3 class="section-title">💬 Mensajes súper kawaii</h3>
+            <div id="messagesContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // La funcionalidad permanece exactamente igual, solo se agregaron efectos visuales kawaii
+        class WebSocketClient {
+            constructor() {
+                this.websocket = null;
+                this.isConnected = false;
+                this.reconnectAttempts = 0;
+                this.maxReconnectAttempts = 3;
+                this.reconnectDelay = 2000;
+                
+                this.initializeElements();
+                this.attachEventListeners();
+                this.updateDebugInfo();
+                this.createFloatingHearts();
+                this.addSystemMessage('🚀 Cliente WebSocket kawaii inicializado! Hello Kitty está lista! 🎀', 'info');
+            }
+            
+            createFloatingHearts() {
+                const heartsContainer = document.getElementById('heartsBackground');
+                const hearts = ['💕', '💖', '💗', '💝', '🌸', '🎀', '✨', '🌟'];
+                
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, 2000);
+            }
+            
+            initializeElements() {
+                this.statusElement = document.getElementById('connectionStatus');
+                this.connectBtn = document.getElementById('connectBtn');
+                this.disconnectBtn = document.getElementById('disconnectBtn');
+                this.testConnBtn = document.getElementById('testConnBtn');
+                this.clearBtn = document.getElementById('clearBtn');
+                this.messageInput = document.getElementById('messageInput');
+                this.sendBtn = document.getElementById('sendBtn');
+                this.messagesContainer = document.getElementById('messagesContainer');
+                this.wsUrlInput = document.getElementById('wsUrl');
+            }
+            
+            attachEventListeners() {
+                this.connectBtn.addEventListener('click', () => this.connect());
+                this.disconnectBtn.addEventListener('click', () => this.disconnect());
+                this.testConnBtn.addEventListener('click', () => this.testConnection());
+                this.clearBtn.addEventListener('click', () => this.clearMessages());
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                
+                this.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+                
+                this.messageInput.addEventListener('input', () => {
+                    this.sendBtn.disabled = !this.messageInput.value.trim() || !this.isConnected;
+                });
+            }
+            
+            updateDebugInfo() {
+                document.getElementById('browserInfo').textContent = navigator.userAgent.split(' ').slice(-2).join(' ');
+                document.getElementById('secureContext').textContent = window.isSecureContext ? '✅ Sí' : '❌ No';
+                document.getElementById('wsSupport').textContent = window.WebSocket ? '🎀 Soportado' : '💔 No soportado';
+                document.getElementById('currentUrl').textContent = window.location.href;
+            }
+            
+            testConnection() {
+                const url = this.wsUrlInput.value.trim();
+                this.addSystemMessage(`🧪 Testing conexión kawaii a: ${url} 🌸`, 'info');
+                
+                try {
+                    const testWs = new WebSocket(url);
+                    
+                    const timeout = setTimeout(() => {
+                        testWs.close();
+                        this.addSystemMessage('⏰ Timeout: Hello Kitty no puede encontrar el servidor en 5 segundos 😿', 'error');
+                    }, 5000);
+                    
+                    testWs.onopen = () => {
+                        clearTimeout(timeout);
+                        this.addSystemMessage('✅ ¡Conexión de prueba exitosa! Hello Kitty está feliz! 🎉', 'info');
+                        testWs.close();
+                    };
+                    
+                    testWs.onerror = (error) => {
+                        clearTimeout(timeout);
+                        this.addSystemMessage(`❌ Error en conexión de prueba: Hello Kitty está confundida 😵`, 'error');
+                    };
+                    
+                    testWs.onclose = (event) => {
+                        clearTimeout(timeout);
+                        if (event.code === 1000) {
+                            this.addSystemMessage('✅ Conexión de prueba cerrada kawaii-mente 🌸', 'info');
+                        } else {
+                            this.addSystemMessage(`❌ Conexión de prueba falló (Código: ${event.code}) - Hello Kitty dice nya~ 😿`, 'error');
+                        }
+                    };
+                    
+                } catch (error) {
+                    this.addSystemMessage(`❌ Error al crear conexión de prueba: ${error.message} 💔`, 'error');
+                }
+            }
+            
+            connect() {
+                const url = this.wsUrlInput.value.trim();
+                
+                if (!url) {
+                    this.addSystemMessage('❌ Por favor, introduce una URL válida para Hello Kitty 🎀', 'error');
+                    return;
+                }
+                
+                if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                    this.addSystemMessage('⚠️ Hello Kitty ya está conectada! 😊', 'info');
+                    return;
+                }
+                
+                this.updateConnectionStatus('connecting', '🔄 Conectando... Hello Kitty está trabajando');
+                this.addSystemMessage(`🔄 Hello Kitty conectando a: ${url} 🌸`, 'info');
+                
+                try {
+                    this.websocket = new WebSocket(url);
+                    this.setupWebSocketEvents();
+                    
+                    setTimeout(() => {
+                        if (this.websocket && this.websocket.readyState === WebSocket.CONNECTING) {
+                            this.addSystemMessage('⏰ Timeout de conexión kawaii (10s) 😴', 'error');
+                            this.websocket.close();
+                        }
+                    }, 10000);
+                    
+                } catch (error) {
+                    this.addSystemMessage(`❌ Error al crear WebSocket kawaii: ${error.message} 💔`, 'error');
+                    this.updateConnectionStatus('disconnected', '❌ Error de conexión - Hello Kitty está triste');
+                }
+            }
+            
+            setupWebSocketEvents() {
+                this.websocket.onopen = (event) => {
+                    this.isConnected = true;
+                    this.reconnectAttempts = 0;
+                    this.updateConnectionStatus('connected', '😻 ¡Conectado! Hello Kitty está súper feliz');
+                    this.addSystemMessage('🎉 ¡Conexión WebSocket kawaii establecida! Hello Kitty dice nya~ 💕', 'info');
+                    
+                    this.messageInput.disabled = false;
+                    this.connectBtn.disabled = true;
+                    this.disconnectBtn.disabled = false;
+                    this.messageInput.focus();
+                };
+                
+                this.websocket.onmessage = (event) => {
+                    const timestamp = new Date().toLocaleTimeString();
+                    this.addSystemMessage(`📨 Hello Kitty recibió un mensaje a las ${timestamp} 🎀`, 'info');
+                    this.addMessage('📥 RECIBIDO KAWAII', event.data, 'received');
+                };
+                
+                this.websocket.onclose = (event) => {
+                    this.isConnected = false;
+                    this.updateConnectionStatus('disconnected', '😿 Desconectado - Hello Kitty está triste');
+                    
+                    if (event.wasClean) {
+                        this.addSystemMessage(`🔌 Conexión cerrada kawaii-mente 🌸`, 'info');
+                    } else {
+                        this.addSystemMessage(`⚠️ Conexión perdida - Hello Kitty perdió la señal 📶`, 'error');
+                        
+                        if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                            this.attemptReconnect();
+                        }
+                    }
+                    
+                    this.messageInput.disabled = true;
+                    this.sendBtn.disabled = true;
+                    this.connectBtn.disabled = false;
+                    this.disconnectBtn.disabled = true;
+                };
+                
+                this.websocket.onerror = (error) => {
+                    this.addSystemMessage(`🚨 ERROR kawaii en WebSocket: Hello Kitty está confundida 😵`, 'error');
+                };
+            }
+            
+            disconnect() {
+                if (this.websocket) {
+                    this.addSystemMessage('🔌 Hello Kitty se está desconectando... 👋', 'info');
+                    this.websocket.close(1000, 'Desconexión manual kawaii de Hello Kitty');
+                }
+            }
+            
+            sendMessage() {
+                const message = this.messageInput.value.trim();
+                
+                if (!message) {
+                    this.addSystemMessage('⚠️ Hello Kitty no puede enviar mensajes vacíos 🎀', 'error');
+                    return;
+                }
+                
+                if (!this.isConnected || this.websocket.readyState !== WebSocket.OPEN) {
+                    this.addSystemMessage('❌ Hello Kitty no está conectada 😿', 'error');
+                    return;
+                }
+                
+                try {
+                    this.websocket.send(message);
+                    this.addMessage('📤 ENVIADO KAWAII', message, 'sent');
+                    this.addSystemMessage(`✅ ¡Mensaje kawaii enviado! Hello Kitty está orgullosa (${message.length} caracteres) 🌟`, 'info');
+                    this.messageInput.value = '';
+                    this.sendBtn.disabled = true;
+                } catch (error) {
+                    this.addSystemMessage(`❌ Error al enviar mensaje kawaii: ${error.message} 💔`, 'error');
+                }
+            }
+            
+            sendPredefinedMessage(message) {
+                if (!this.isConnected) {
+                    this.addSystemMessage('❌ Hello Kitty necesita estar conectada para enviar mensajes 🎀', 'error');
+                    return;
+                }
+                
+                this.messageInput.value = message;
+                this.sendMessage();
+            }
+            
+            attemptReconnect() {
+                this.reconnectAttempts++;
+                this.addSystemMessage(
+                    `🔄 Hello Kitty intentando reconectar ${this.reconnectAttempts}/${this.maxReconnectAttempts} en ${this.reconnectDelay/1000} segundos... 🌸`, 
+                    'info'
+                );
+                
+                setTimeout(() => {
+                    if (!this.isConnected) {
+                        this.connect();
+                    }
+                }, this.reconnectDelay);
+            }
+            
+            addMessage(prefix, content, type) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message message-${type}`;
+                
+                const timestamp = new Date().toLocaleTimeString();
+                messageDiv.innerHTML = `
+                    <div><strong>${prefix}:</strong> ${this.escapeHtml(content)}</div>
+                    <div class="timestamp">${timestamp} - Con amor, Hello Kitty 💕</div>
+                `;
+                
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            addSystemMessage(message, type) {
+                this.addMessage('🔧 SISTEMA KAWAII', message, type);
+            }
+            
+            updateConnectionStatus(status, text) {
+                this.statusElement.className = `status ${status}`;
+                this.statusElement.textContent = text;
+            }
+            
+            clearMessages() {
+                this.messagesContainer.innerHTML = '';
+                this.addSystemMessage('🧹 Hello Kitty limpió todos los mensajes kawaii! ✨', 'info');
+            }
+            
+            scrollToBottom() {
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+            
+            escapeHtml(unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+        }
+        
+        // Funciones globales kawaii
+        function sendPredefinedMessage(message) {
+            if (window.wsClient) {
+                window.wsClient.sendPredefinedMessage(message);
+            }
+        }
+        
+        function setUrl(url) {
+            document.getElementById('wsUrl').value = url;
+            if (window.wsClient) {
+                window.wsClient.addSystemMessage(`🔗 Hello Kitty cambió la URL a: ${url} 🌸`, 'info');
+            }
+        }
+        
+        // Inicializar Hello Kitty
+        document.addEventListener('DOMContentLoaded', () => {
+            window.wsClient = new WebSocketClient();
+        });
+    </script>
+</body>
+</html>
