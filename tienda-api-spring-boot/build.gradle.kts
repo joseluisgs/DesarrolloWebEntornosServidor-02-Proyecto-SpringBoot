@@ -112,15 +112,15 @@ tasks.withType<Test> {
 }
 
 // Create separate task for integration tests
-tasks.register<Test>("integrationTest") {
+val integrationTest = tasks.register<Test>("integrationTest") {
     description = "Runs integration tests with TestContainers"
     group = "verification"
     
-    useJUnitPlatform()
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
     
-    filter {
-        includeTestsMatching("*IntegrationTest")
-        includeTestsMatching("*IT")
+    useJUnitPlatform {
+        includeTags("integration")
     }
     
     testLogging {

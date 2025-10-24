@@ -37,4 +37,5 @@ out/
 .vscode/
 
 
-storage_dir/
+storage_dir/*.broken
+logs/
