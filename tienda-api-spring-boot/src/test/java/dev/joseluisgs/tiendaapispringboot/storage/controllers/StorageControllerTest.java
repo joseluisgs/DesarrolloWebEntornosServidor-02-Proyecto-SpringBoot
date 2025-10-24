@@ -1,6 +1,6 @@
 package dev.joseluisgs.tiendaapispringboot.storage.controllers;
 
-import dev.joseluisgs.tiendaapispringboot.storage.StorageService;
+import dev.joseluisgs.tiendaapispringboot.rest.storage.services.StorageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
