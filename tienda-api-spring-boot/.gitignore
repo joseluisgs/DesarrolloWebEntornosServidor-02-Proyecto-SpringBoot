@@ -37,5 +37,6 @@ out/
 .vscode/
 
 
-storage_dir/*.broken
+# Test artifacts and temporary files
+*.broken
 logs/

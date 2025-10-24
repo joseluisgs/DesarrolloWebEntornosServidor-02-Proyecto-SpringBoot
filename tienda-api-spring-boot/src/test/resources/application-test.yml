@@ -5,7 +5,8 @@ spring:
   application:
     name: tienda-api-test
   
-  # PostgreSQL configuration for tests (will be overridden by TestContainers)
+  # PostgreSQL configuration for tests (H2 fallback when TestContainers not used)
+  # TestContainers will override these with real PostgreSQL connection
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
