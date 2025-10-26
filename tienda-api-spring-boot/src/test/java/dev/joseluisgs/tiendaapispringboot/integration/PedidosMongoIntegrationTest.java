@@ -1,7 +1,9 @@
 package dev.joseluisgs.tiendaapispringboot.integration;
 
-import dev.joseluisgs.tiendaapispringboot.model.Pedidos;
-import dev.joseluisgs.tiendaapispringboot.repository.PedidosRepository;
+import dev.joseluisgs.tiendaapispringboot.rest.pedidos.models.Cliente;
+import dev.joseluisgs.tiendaapispringboot.rest.pedidos.models.Direccion;
+import dev.joseluisgs.tiendaapispringboot.rest.pedidos.models.Pedido;
+import dev.joseluisgs.tiendaapispringboot.rest.pedidos.repositories.PedidosRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,45 +21,64 @@ public class PedidosMongoIntegrationTest {
     @Autowired
     private PedidosRepository pedidosRepository;
 
-    private Pedidos pedido;
+    private Pedido pedido;
 
     @BeforeEach
     public void setUp() {
-        // Initialize a new Pedidos entity before each test
-        pedido = new Pedidos();
+        // Initialize a new Pedido entity before each test
+        pedido = new Pedido();
         pedido.setId(null); // Let MongoDB generate the ObjectId
-        pedido.setCliente("Cliente Test");
+        
+        // Create Cliente with Direccion
+        Direccion direccion = Direccion.builder()
+                .calle("Calle Test")
+                .numero("123")
+                .ciudad("Madrid")
+                .provincia("Madrid")
+                .pais("España")
+                .codigoPostal("28001")
+                .build();
+                
+        Cliente cliente = new Cliente(
+                "Cliente Test",
+                "test@example.com",
+                "123456789",
+                direccion
+        );
+        
+        pedido.setCliente(cliente);
+        pedido.setIdUsuario(1L);
         pedido.setTotal(100.0);
         // Set other properties as needed
     }
 
     @Test
     public void testCreatePedido() {
-        Pedidos savedPedido = pedidosRepository.save(pedido);
+        Pedido savedPedido = pedidosRepository.save(pedido);
         assertNotNull(savedPedido.getId(), "Pedido ID should not be null after save");
     }
 
     @Test
     public void testReadPedido() {
-        Pedidos savedPedido = pedidosRepository.save(pedido);
-        Optional<Pedidos> foundPedido = pedidosRepository.findById(savedPedido.getId());
+        Pedido savedPedido = pedidosRepository.save(pedido);
+        Optional<Pedido> foundPedido = pedidosRepository.findById(savedPedido.getId());
         assertTrue(foundPedido.isPresent(), "Pedido should be found");
         assertEquals(savedPedido.getCliente(), foundPedido.get().getCliente(), "Cliente should match");
     }
 
     @Test
     public void testUpdatePedido() {
-        Pedidos savedPedido = pedidosRepository.save(pedido);
+        Pedido savedPedido = pedidosRepository.save(pedido);
         savedPedido.setTotal(150.0);
-        Pedidos updatedPedido = pedidosRepository.save(savedPedido);
+        Pedido updatedPedido = pedidosRepository.save(savedPedido);
         assertEquals(150.0, updatedPedido.getTotal(), "Total should be updated");
     }
 
     @Test
     public void testDeletePedido() {
-        Pedidos savedPedido = pedidosRepository.save(pedido);
+        Pedido savedPedido = pedidosRepository.save(pedido);
         pedidosRepository.delete(savedPedido);
-        Optional<Pedidos> foundPedido = pedidosRepository.findById(savedPedido.getId());
+        Optional<Pedido> foundPedido = pedidosRepository.findById(savedPedido.getId());
         assertFalse(foundPedido.isPresent(), "Pedido should be deleted");
     }
 
@@ -70,7 +91,7 @@ public class PedidosMongoIntegrationTest {
     @Test
     public void testObjectIdSerialization() {
         // Test the serialization and deserialization of ObjectId
-        Pedidos savedPedido = pedidosRepository.save(pedido);
+        Pedido savedPedido = pedidosRepository.save(pedido);
         String objectIdString = savedPedido.getId().toString();
         assertEquals(objectIdString, savedPedido.getId().toString(), "ObjectId should serialize correctly");
     }

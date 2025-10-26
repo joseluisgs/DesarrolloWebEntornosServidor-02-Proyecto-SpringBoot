@@ -22,111 +22,138 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
+// Extra properties for dependency versions
+val testcontainersVersion = "1.19.3"
 
 dependencies {
-    // Dependencias de Spring Web for HTML Apps y Rest
+    // Spring Boot Starters
     implementation("org.springframework.boot:spring-boot-starter-web")
-    
-    // Spring Data JPA par SQL
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    
-    // Spring Data JPA para MongoDB
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    
-    // Cache
-    implementation("org.springframework.boot:spring-boot-starter-cache")
-    
-    // Validación
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    
-    // Websocket
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
-    
-    // Thyemeleaf
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    
-    // Spring Security
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    
-    // GraphQL con Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
-    
-    // Cache con redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    
-    // Mail sender
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.boot:spring-boot-starter-mail")
+    
+    // Thymeleaf extras
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    
+    // Database Drivers
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.h2database:h2")
+    
+    // JWT - using Auth0 JWT
+    implementation("com.auth0:java-jwt:4.4.0")
+    
+    // Swagger/OpenAPI
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
     
     // Lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     
-    // H2 Database - Para desarrollo
-    implementation("com.h2database:h2")
-    // PostgreSQL - Para producción
-    implementation("org.postgresql:postgresql")
-    
-    // Para usar con jackson el controlador las fechas: LocalDate, LocalDateTime, etc
+    // Jackson for JSON processing
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     
-    // Para pasar a XML los responses, negocacion de contenido
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    // WebSocket
+    implementation("org.springframework:spring-websocket")
+    implementation("org.springframework:spring-messaging")
     
-    // Para manejar los JWT tokens
-    implementation("com.auth0:java-jwt:4.4.0")
-    
-    // Swagger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
-    
-    // Dependencias para Test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // Test Dependencies
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.junit.platform:junit-platform-launcher")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.springframework.graphql:spring-graphql-test")
     
-    // TestContainers para tests de integración - AÑADIDO CORRECTAMENTE
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.testcontainers:mongodb")
-    testImplementation("org.testcontainers:testcontainers")
+    // TestContainers
+    testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
+    testImplementation("org.testcontainers:junit-jupiter:$testcontainersVersion")
+    testImplementation("org.testcontainers:postgresql:$testcontainersVersion")
+    testImplementation("org.testcontainers:mongodb:$testcontainersVersion")
     
-    // Extras para web
-    implementation("org.webjars:bootstrap:4.6.2")
-}
-
-// Configuración mejorada de Jacoco - AÑADIDA CORRECTAMENTE
-jacoco {
-    toolVersion = "0.8.8"
+    // MongoDB Test
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.11.0")
+    
+    // Mockito
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-junit-jupiter")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
+    
+    testLogging {
+        events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = false
+    }
+    
+    // Separate integration tests
+    if (project.hasProperty("integrationTest")) {
+        filter {
+            includeTestsMatching("*IntegrationTest")
+            includeTestsMatching("*IT")
+        }
+    } else {
+        filter {
+            excludeTestsMatching("*IntegrationTest")
+            excludeTestsMatching("*IT")
+        }
+    }
 }
 
-tasks.test {
-    systemProperty("spring.profiles.active", project.findProperty("spring.profiles.active") ?: "test")
+// Create separate task for integration tests
+val integrationTest = tasks.register<Test>("integrationTest") {
+    description = "Runs integration tests with TestContainers"
+    group = "verification"
+    
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+    
+    useJUnitPlatform {
+        includeTags("integration")
+    }
+    
+    testLogging {
+        events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = true
+    }
+    
+    shouldRunAfter(tasks.test)
+}
+
+// Jacoco configuration
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    
     reports {
-        xml.required = true
-        csv.required = true
-        html.required = true
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+        xml.required.set(true)
+        csv.required.set(true)
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco"))
     }
     
     classDirectories.setFrom(
         files(classDirectories.files.map {
             fileTree(it) {
-                exclude("**/*Application*")
-                exclude("**/config/**")
-                exclude("**/dto/**")
-                exclude("**/models/**")
+                exclude(
+                    "**/config/**",
+                    "**/dto/**",
+                    "**/exceptions/**",
+                    "**/TiendaApiSpringBootApplication**"
+                )
             }
         })
     )
@@ -134,22 +161,34 @@ tasks.jacocoTestReport {
 
 tasks.jacocoTestCoverageVerification {
     dependsOn(tasks.jacocoTestReport)
+    
     violationRules {
         rule {
             limit {
-                counter = "LINE"
-                value = "COVEREDRATIO"
                 minimum = "0.75".toBigDecimal()
+                counter = "LINE"
             }
         }
         rule {
             limit {
-                counter = "BRANCH" 
-                value = "COVEREDRATIO"
                 minimum = "0.70".toBigDecimal()
+                counter = "BRANCH"
             }
         }
     }
+    
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it) {
+                exclude(
+                    "**/config/**",
+                    "**/dto/**",
+                    "**/exceptions/**",
+                    "**/TiendaApiSpringBootApplication**"
+                )
+            }
+        })
+    )
 }
 
 tasks.check {
