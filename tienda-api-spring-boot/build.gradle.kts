@@ -1,22 +1,20 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 plugins {
-    id("org.springframework.boot") version "3.3.5"
-    id("io.spring.dependency-management") version "1.1.6"
-    id("java")
-    id("jacoco")
+    java // Plugin de Java
+    id("org.springframework.boot") version "3.5.6" // Plugin de Spring Boot
+    id("io.spring.dependency-management") version "1.1.7" // Plugin de gestión de dependencias de Spring
+    id("jacoco") // Plugin de Jacoco para test de cobertura
 }
 
 group = "dev.joseluisgs"
-version = "1.0.0"
+version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-}
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
+    // versión de Java
+    sourceCompatibility = JavaVersion.VERSION_25 // Sintaxis de Java 25
+    targetCompatibility = JavaVersion.VERSION_25 // Versión de Java 25 para ser compilado y ejecutado
+    
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25) // Versión de Java 25 para el toolchain
     }
 }
 
