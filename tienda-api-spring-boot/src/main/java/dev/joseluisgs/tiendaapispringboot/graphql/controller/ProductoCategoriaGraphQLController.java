@@ -1,4 +1,4 @@
-package dev.joseluisgs.tiendaapispringboot.graphql;
+package dev.joseluisgs.tiendaapispringboot.graphql.controller;
 
 // Aquí están los Resolvers de GraphQL para Producto y Categoria
 

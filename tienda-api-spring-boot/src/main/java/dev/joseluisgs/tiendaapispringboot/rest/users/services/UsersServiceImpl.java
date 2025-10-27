@@ -57,9 +57,11 @@ public class UsersServiceImpl implements UsersService {
                         .orElseGet(() -> criteriaBuilder.isTrue(criteriaBuilder.literal(true)));
 
         // Combinamos las especificaciones
-        Specification<User> criterio = Specification.where(specUsernameUser)
-                .and(specEmailUser)
-                .and(specIsDeleted);
+        Specification<User> criterio = Specification.allOf(
+                specUsernameUser,
+                specEmailUser,
+                specIsDeleted
+        );
 
         // Debe devolver un Page, por eso usamos el findAll de JPA
         return usersRepository.findAll(criterio, pageable).map(usersMapper::toUserResponse);

@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     java // Plugin de Java
     id("org.springframework.boot") version "3.5.6" // Plugin de Spring Boot
