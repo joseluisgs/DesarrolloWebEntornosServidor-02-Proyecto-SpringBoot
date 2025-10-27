@@ -60,7 +60,8 @@ dependencies {
     
     // Jackson for JSON processing
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    // Jackson XML support
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
     
     // WebSocket
     implementation("org.springframework:spring-websocket")
@@ -68,7 +69,10 @@ dependencies {
     
     // Test Dependencies
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+        exclude(
+            group = "org.junit.vintage",
+            module = "junit-vintage-engine"
+        ) // Por si usamos JUnit 4 en algún proyecto viejo
     }
     testImplementation("org.junit.platform:junit-platform-launcher")
     testImplementation("org.springframework.security:spring-security-test")
