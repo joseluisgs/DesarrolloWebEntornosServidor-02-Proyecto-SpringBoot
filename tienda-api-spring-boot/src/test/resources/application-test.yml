@@ -1,0 +1,97 @@
+# Application Test Configuration
+# This configuration is used for tests with H2 in-memory database
+
+spring:
+  application:
+    name: tienda-api-test
+  
+  # PostgreSQL configuration for tests (H2 fallback when TestContainers not used)
+  # TestContainers will override these with real PostgreSQL connection
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  
+  # JPA/Hibernate configuration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+  
+  # MongoDB configuration for tests (will be overridden by TestContainers or embedded)
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+      database: test
+  
+  # Redis configuration for tests (will be overridden by TestContainers)
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+  
+  # Cache configuration
+  cache:
+    type: simple
+  
+  # Security configuration for tests
+  security:
+    jwt:
+      secret: test-secret-key-for-testing-purposes-only-minimum-256-bits
+      expiration: 3600000
+  
+  # Storage configuration for tests
+  upload:
+    root-location: test-storage
+    delete: true
+  
+  # Mail configuration (disabled for tests)
+  mail:
+    host: localhost
+    port: 1025
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+  
+  # Thymeleaf configuration
+  thymeleaf:
+    cache: false
+  
+  # GraphQL configuration
+  graphql:
+    path: /graphql
+    schema:
+      printer:
+        enabled: true
+
+# Logging configuration for tests
+logging:
+  level:
+    root: WARN
+    dev.joseluisgs: INFO
+    org.springframework.test: INFO
+    org.springframework.boot.test: INFO
+    org.testcontainers: INFO
+    org.hibernate.SQL: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: ERROR
+
+# API configuration
+api:
+  version: v1
+
+# Server configuration
+server:
+  port: 0
+  error:
+    include-message: always

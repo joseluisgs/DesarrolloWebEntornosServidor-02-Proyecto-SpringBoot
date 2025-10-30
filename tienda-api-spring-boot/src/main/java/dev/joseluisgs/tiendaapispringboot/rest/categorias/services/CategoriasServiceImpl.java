@@ -48,9 +48,10 @@ public class CategoriasServiceImpl implements CategoriasService {
                         .orElseGet(() -> criteriaBuilder.isTrue(criteriaBuilder.literal(true)));
 
         // Combinamos las especificaciones
-        Specification<Categoria> criterio = Specification.where(specNombreCategoria)
-                .and(specIsDeleted);
-
+        Specification<Categoria> criterio = Specification.allOf(
+                specNombreCategoria,
+                specIsDeleted
+        );
         return categoriasRepository.findAll(criterio, pageable);
     }
 
