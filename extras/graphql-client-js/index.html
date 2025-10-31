@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cliente GraphQL 💖</title>
+    <style>
+      /* Estilos Hello Kitty */
+      @import url('https://fonts.googleapis.com/css2?family=Knewave&family=Balsamiq+Sans&display=swap');
+
+      body {
+        background-color: #fff0f5; /* Rosa muy pálido (Lavender Blush) */
+        font-family: 'Balsamiq Sans', cursive, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .container {
+        background-color: #ffffff;
+        border: 3px solid #ff69b4; /* Rosa fuerte */
+        border-radius: 20px;
+        padding: 25px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0 8px 16px rgba(255, 105, 180, 0.3);
+      }
+
+      h1 {
+        color: #ff69b4; /* Rosa fuerte */
+        text-align: center;
+        font-family: 'Knewave', cursive;
+        font-size: 2.5em;
+        margin-top: 0;
+        text-shadow: 2px 2px #ffc0cb; /* Rosa claro */
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        color: #de3163; /* Rosa más oscuro */
+        margin-bottom: 8px;
+        font-size: 1.2em;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 150px;
+        border: 2px solid #ffc0cb; /* Rosa claro */
+        border-radius: 10px;
+        padding: 10px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1em;
+        box-sizing: border-box; /* Para que el padding no afecte el width */
+      }
+
+      textarea:focus {
+        border-color: #ff69b4;
+        outline: none;
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #ff69b4; /* Rosa fuerte */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-family: 'Knewave', cursive;
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #de3163;
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.6);
+      }
+
+      #error {
+        color: #d8000c; /* Rojo error */
+        background-color: #ffd2d2;
+        border: 1px solid #d8000c;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      #response {
+        background-color: #fdf5e6; /* Un color crema suave */
+        border: 2px dashed #ffc0cb;
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 20px;
+        white-space: pre-wrap; /* Para que el JSON se formatee bien */
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💖 Hello, GraphQL! 💖</h1>
+
+      <div class="form-group">
+        <label for="query">Query:</label>
+        <textarea
+          id="query"
+          rows="10"
+          placeholder="Escribe tu query de GraphQL aquí...&#10;{&#10;  hello&#10;}"
+        >
+{
+  hello
+}</textarea
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="variables">Variables (en JSON):</label>
+        <textarea id="variables" rows="5" placeholder='{&#10;  "id": "123"&#10;}'></textarea>
+      </div>
+
+      <button id="sendQuery">Enviar Query 🎀</button>
+
+      <div id="error" style="display: none"></div>
+
+      <div class="form-group">
+        <label for="response">Respuesta:</label>
+        <pre id="response"></pre>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('sendQuery').addEventListener('click', async () => {
+        // --- ¡IMPORTANTE! ---
+        // Probablemente quieras cambiar este endpoint.
+        // '/graphiql' es la *interfaz* de consulta, no el endpoint de la API.
+        // El endpoint real suele ser '/graphql'.
+        const endpoint = 'https://localhost:3000/graphql';
+        // ---------------------
+
+        const query = document.getElementById('query').value;
+        const variablesString = document.getElementById('variables').value;
+        const responseElement = document.getElementById('response');
+        const errorElement = document.getElementById('error');
+
+        // Limpiar resultados anteriores
+        responseElement.textContent = '';
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+
+        let variables;
+        try {
+          // Parsear variables. Si está vacío, usa un objeto vacío.
+          variables = variablesString ? JSON.parse(variablesString) : {};
+        } catch (e) {
+          errorElement.textContent = 'Error: Las variables no son un JSON válido. ' + e.message;
+          errorElement.style.display = 'block';
+          return;
+        }
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+              query: query,
+              variables: variables,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (result.errors) {
+            // Errores devueltos por GraphQL
+            errorElement.textContent = JSON.stringify(result.errors, null, 2);
+            errorElement.style.display = 'block';
+          } else if (result.data) {
+            // Éxito
+            responseElement.textContent = JSON.stringify(result.data, null, 2);
+          }
+        } catch (error) {
+          // Errores de red, CORS, SSL, etc.
+          console.error('Error en fetch:', error);
+          errorElement.textContent =
+            'Error de conexión: No se pudo conectar al endpoint. Revisa la consola para más detalles. (Posibles problemas: CORS, SSL, o el servidor no está corriendo). ' +
+            error.message;
+          errorElement.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
+</html>

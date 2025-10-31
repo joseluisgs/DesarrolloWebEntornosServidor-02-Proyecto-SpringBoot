@@ -8,23 +8,31 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
     /**
-     * CORS: Configuración más ajustada.
+     * CORS: Configuración para desarrollo.
      */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
 
             @Override
-            // Ajustamos una configuración específica para cada serie de métodos
-            // Así por cada fuente podemos permitir lo que queremos
-            // Por ejemplo ene esta configuración solo permitirmos el dominio producto
-            // Permitimos solo un dominio
-            // e indicamos los verbos que queremos usar
-            // Debes probar con uncliente desde ese puerto
             public void addCorsMappings(CorsRegistry registry) {
+
+                // ¡OJO! allowedOrigins("*") permite CUALQUIER origen.
+                // Esto está BIEN para desarrollo local, pero es INSEGURO para producción.
+
                 registry.addMapping("/rest/producto/**")
-                        //.allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("*") // Permitir todos para testing, si no cambiar por dominios específicos
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .maxAge(3600);
+
+                registry.addMapping("/graphql/**")
+                        .allowedOrigins("*") // <- EL CAMBIO IMPORTANTE, permitir todos los orígenes, si no cambiar por dominios específicos
+                        .allowedMethods("POST", "OPTIONS") // Añadido OPTIONS para peticiones "preflight"
+                        .maxAge(3600);
+
+                registry.addMapping("/wss/**")
+                        .allowedOrigins("*") // Permitir todos para testing, si no cambiar por dominios específicos
+                        .allowedMethods("GET", "POST")
                         .maxAge(3600);
             }
 

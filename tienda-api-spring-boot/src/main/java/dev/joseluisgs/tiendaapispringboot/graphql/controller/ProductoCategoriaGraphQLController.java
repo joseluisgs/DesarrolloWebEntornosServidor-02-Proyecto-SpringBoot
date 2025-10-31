@@ -69,6 +69,14 @@ public class ProductoCategoriaGraphQLController {
         }
     }
 
+    // categoriasByNombre(nombre: String!): [Categoria!]!
+    @QueryMapping
+    public List<Categoria> categoriasByNombre(@Argument String nombre) {
+        // Devuelve las categorías que coinciden con el nombre (case insensitive)
+        return categoriasRepository.findAllByNombreContainingIgnoreCase(nombre);
+        // En caso de que no encuentre ninguna, devuelve una lista vacía
+    }
+
     // --- RESOLVERS RELACIONES ---
 
     @SchemaMapping(typeName = "Producto", field = "categoria")
@@ -82,4 +90,6 @@ public class ProductoCategoriaGraphQLController {
         // Devuelve los productos de una categoría
         return productosRepository.findByCategoria(categoria);
     }
+
+
 }

@@ -53,6 +53,11 @@ type Query {
     # Parametro: id (obligatorio) - El UUID de la categoria a buscar
     # Retorna: Categoria o null si no existe
     categoriaById(id: ID!): Categoria
+
+    # Busca y devuelve una lista de categorias que coincidan con el nombre dado
+    # Parametro: nombre (obligatorio) - El nombre de la categoria a buscar
+    # Retorna: Lista de categorias que coincidan con el nombre
+    categoriasByNombre(nombre: String!): [Categoria!]!
 }
 
 # --- TIPO PRODUCTO ---
