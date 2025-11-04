@@ -17,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -109,7 +109,7 @@ class ProductosRestControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     MockMvc mockMvc; // Cliente MVC
-    @MockBean
+    @MockitoBean
     private ProductosService productosService;
 
     @Autowired
@@ -118,7 +118,7 @@ class ProductosRestControllerTest {
         mapper.registerModule(new JavaTimeModule()); // Necesario para que funcione LocalDateTime
     }
 
-    
+
     @Test
     void getAllProducts() throws Exception {
         var productosList = List.of(productoResponse1, productoResponse2);

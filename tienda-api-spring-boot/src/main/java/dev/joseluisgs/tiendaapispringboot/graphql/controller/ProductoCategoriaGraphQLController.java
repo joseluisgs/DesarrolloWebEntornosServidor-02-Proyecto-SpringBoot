@@ -26,6 +26,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
+// @PreAuthorize("hasAnyRole('USER')") // Protección a nivel de clase
 public class ProductoCategoriaGraphQLController {
 
     private final ProductosRepository productosRepository;

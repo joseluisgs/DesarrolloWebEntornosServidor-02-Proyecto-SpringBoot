@@ -31,9 +31,9 @@ class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("API REST Tienda Spring Boot DAW 2023/2024")
+                                .title("API REST Tienda Spring Boot DAW 2025/2026")
                                 .version("1.0.0")
-                                .description("API de ejemplo del curso Desarrollo de un API REST con Spring Boot para 2º DAW. 2023/2024")
+                                .description("API de ejemplo del curso Desarrollo de un API REST con Spring Boot para 2º DAW. 2025/2026")
                                 .termsOfService("https://joseluisgs.dev/docs/license/")
                                 .license(
                                         new License()
@@ -73,7 +73,7 @@ class SwaggerConfig {
                 // Algunas rutas son JWT
                 // .pathsToMatch("/v1/**") // Todas las rutas
                 .pathsToMatch("/" + apiVersion + "/productos/**") //Solo productos
-                .displayName("API Tienda Spring Boot DAW 2023/2024")
+                .displayName("API Tienda Spring Boot DAW 2025/2026")
                 .build();
     }
 }
