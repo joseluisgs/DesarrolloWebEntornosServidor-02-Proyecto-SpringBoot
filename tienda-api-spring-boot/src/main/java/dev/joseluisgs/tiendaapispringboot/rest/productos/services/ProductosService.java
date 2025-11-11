@@ -3,10 +3,13 @@ package dev.joseluisgs.tiendaapispringboot.rest.productos.services;
 import dev.joseluisgs.tiendaapispringboot.rest.productos.dto.ProductoCreateRequest;
 import dev.joseluisgs.tiendaapispringboot.rest.productos.dto.ProductoResponse;
 import dev.joseluisgs.tiendaapispringboot.rest.productos.dto.ProductoUpdateRequest;
+import dev.joseluisgs.tiendaapispringboot.rest.productos.models.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductosService {
@@ -23,4 +26,6 @@ public interface ProductosService {
     void deleteById(Long id);
 
     ProductoResponse updateImage(Long id, MultipartFile image, Boolean withUrl);
+
+    List<Producto> findByCreatedAtBetween(LocalDateTime ultimaEjecucion, LocalDateTime ahora);
 }

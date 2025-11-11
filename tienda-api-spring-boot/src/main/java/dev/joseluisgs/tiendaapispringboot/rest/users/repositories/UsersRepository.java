@@ -29,4 +29,6 @@ public interface UsersRepository extends JpaRepository<User, Long>, JpaSpecifica
         // Consulta de actualización
     void updateIsDeletedToTrueById(Long id);
 
+    List<User> findAllByIsDeletedFalse();
+
 }

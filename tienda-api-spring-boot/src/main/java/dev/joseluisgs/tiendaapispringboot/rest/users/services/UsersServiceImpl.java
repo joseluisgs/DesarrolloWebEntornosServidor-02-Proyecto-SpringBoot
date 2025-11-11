@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -122,5 +123,10 @@ public class UsersServiceImpl implements UsersService {
             log.info("Borrado físico de usuario por id: " + id);
             usersRepository.delete(user);
         }
+    }
+
+    public List<User> findAllActiveUsers() {
+        log.info("Buscando todos los usuarios activos");
+        return usersRepository.findAllByIsDeletedFalse();
     }
 }

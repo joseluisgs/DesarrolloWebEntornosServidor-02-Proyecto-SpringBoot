@@ -57,7 +57,7 @@ public class PedidosServiceImpl implements PedidosService {
     }
 
     @Override
-    @Transactional
+    @Transactional // Para que todo sea una transacción, si falla algo, se deshace todo
     @CachePut(key = "#result.id")
     public Pedido save(Pedido pedido) {
         log.info("Guardando pedido: {}", pedido);

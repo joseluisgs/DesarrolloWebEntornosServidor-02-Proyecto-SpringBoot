@@ -33,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -353,4 +354,11 @@ public class ProductosServiceImpl implements ProductosService {
     public void setWebSocketService(WebSocketHandler webSocketHandlerMock) {
         this.webSocketService = webSocketHandlerMock;
     }
+
+
+    public List<Producto> findByCreatedAtBetween(LocalDateTime ultimaEjecucion, LocalDateTime ahora) {
+        log.info("Buscando productos creados entre {} y {}", ultimaEjecucion, ahora);
+        return productosRepository.findByCreatedAtBetween(ultimaEjecucion, ahora);
+    }
+
 }
