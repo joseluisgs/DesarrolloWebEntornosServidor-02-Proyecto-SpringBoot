@@ -1,7 +1,7 @@
-# DesarrolloWebEntornosServidor-02-Proyecto-2023-2024
-Desarrollo Web en Entornos Servidor - 02 Programación de servicios y apps web en Java/JVM Proyecto. 2DAW. Curso 2023-2024
+# TiendaApiDaw-SpringBoot
+Proyecto de una API REST usando Spring Boot.
 
-- [DesarrolloWebEntornosServidor-02-Proyecto-2023-2024](#desarrollowebentornosservidor-02-proyecto-2023-2024)
+- [TiendaApiDaw-SpringBoot](#tiendaapidaw-springboot)
 - [Proyecto](#proyecto)
 - [Problema](#problema)
   - [Elementos del dominio](#elementos-del-dominio)
@@ -31,7 +31,7 @@ Desarrollo Web en Entornos Servidor - 02 Programación de servicios y apps web e
 ![](images/banner.jpg)
 
 # Proyecto
-Este proyecto es una muestra de lo que se ha ido viendo en clase siguiendo los pasos del [repositorio del tema](https://github.com/joseluisgs/DesarrolloWebEntornosServidor-02-2023-2024).
+Este proyecto es una muestra de lo que se ha ido viendo en clase siguiendo los pasos del [repositorio del tema](https://github.com/joseluisgs?tab=repositories&q=DesarrolloWebEntornosServidor-02&type=&language=&sort=).
 
 Podrás seguir sus pasos commit a commit o en las ramas indicadas por clase.
 
